@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -26,10 +28,10 @@ public class PlayerTank extends JPanel implements ActionListener, KeyListener{
 	private Image tankS = null;
 	private Image tankE = null;
 	private Image tankW = null;
-	private JFrame frame;
+	
+	private List<Bullet> bullets;
 
-	public PlayerTank(JFrame frame) {
-		this.frame = frame;
+	public PlayerTank() {
 		// change to enums
 		facing = "RIGHT";
 
@@ -46,11 +48,13 @@ public class PlayerTank extends JPanel implements ActionListener, KeyListener{
 			e.printStackTrace();
 		}
 
-		t = new Timer(5, this);
+		t = new Timer(20, this);
 		t.start();
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
+		
+		bullets = new ArrayList<>();
 	}
 
 
@@ -77,6 +81,10 @@ public class PlayerTank extends JPanel implements ActionListener, KeyListener{
 			//redraw or rotate image
 			break;
 		}
+		for (Bullet bullet: bullets){
+			bullet.paint(g);
+		}
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -196,7 +204,8 @@ public class PlayerTank extends JPanel implements ActionListener, KeyListener{
 		else if (code == KeyEvent.VK_SPACE) {
 			Bullet bullet = new Bullet (facing, x, y);
 			//add to the frame
-			frame.add(bullet);
+//			frame.add(bullet);
+			bullets.add(bullet);
 		}
 	}
 	public void keyTyped(KeyEvent e) {}

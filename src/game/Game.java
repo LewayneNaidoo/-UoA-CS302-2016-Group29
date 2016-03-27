@@ -4,7 +4,6 @@ import java.awt.Canvas;
 
 import javax.swing.JFrame;
 
-import graphics.Bullet;
 import graphics.PlayerTank;
 
 public class Game extends Canvas implements Runnable{
@@ -14,9 +13,7 @@ private static final long serialVersionUID = 1L;
 	
 	public Game(){
 		frame = new JFrame();
-		PlayerTank player = new PlayerTank(frame);
-		Bullet b = new Bullet("RIGHT",0,0);
-		frame.add(b);
+		PlayerTank player = new PlayerTank();
 		frame.add(player);
 		frame.pack();
 		frame.setResizable(false);
