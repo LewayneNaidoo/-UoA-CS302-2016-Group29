@@ -12,10 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
-import javax.swing.Timer;
 
 public class Player{
-	private Timer t = null;
 	private double x = 0;
 	private double y = 0;
 	private double vel = 0;
@@ -42,12 +40,6 @@ public class Player{
 		{
 			e.printStackTrace();
 		}
-//
-//		t = new Timer(33, this);
-//		t.start();
-//		addKeyListener(this);
-//		setFocusable(true);
-//		setFocusTraversalKeysEnabled(false);
 
 		tank = createTransformedImage((BufferedImage) originalTankImage);
 		bullets = new ArrayList<>();
@@ -68,111 +60,11 @@ public class Player{
 		}
 	}
 
-//		public void actionPerformed(ActionEvent e) {
-//			if (x<30){
-//				vel = 0;
-//				x = 30;
-//			}
-//			if (x>950) {
-//				vel = 0;
-//				x = 950;
-//			}
-//			if (y>670){
-//				vel = 0;
-//				y = 670;
-//			}
-//			if (y<30){
-//				vel = 0;
-//				y = 30;
-//			}
-//			repaint();
-//			move();
-//		}
-
 	public void move(){
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
 	}
 
-
-	//WHen pressing up, move according to direction facing
-	public void up() {
-		//		switch (facing){
-		//		case "RIGHT" :
-		//			vely = 0;
-		//			velx = 1.5;
-		//			break;
-		//		case "LEFT" :
-		//			vely = 0;
-		//			velx = -1.5;
-		//			break;
-		//		case "UP" :
-		//			vely = -1.5;
-		//			velx = 0;
-		//			break;
-		//		case "DOWN" :
-		//			vely = 1.5;
-		//			velx = 0;
-		//			break;
-		//		}
-		vel = 3;
-	}
-
-	//WHen pressing down, move according to direction facing
-	public void down() {
-		//		switch (facing){
-		//		case "RIGHT" :
-		//			vely = 0;
-		//			velx = -1.5;
-		//			break;
-		//		case "LEFT" :
-		//			vely = 0;
-		//			velx = 1.5;
-		//			break;
-		//		case "UP" :
-		//			vely = 1.5;
-		//			velx = 0;
-		//			break;
-		//		case "DOWN" :
-		//			vely = -1.5;
-		//			velx = 0;
-		//			break;
-		//		}
-		vel = -3;
-	}
-
-	//	public void left() {
-	//		switch (facing){
-	//		case "RIGHT" :
-	//			facing = "UP";
-	//			break;
-	//		case "LEFT" :
-	//			facing = "DOWN";
-	//			break;
-	//		case "UP" :
-	//			facing = "LEFT";
-	//			break;
-	//		case "DOWN" :
-	//			facing = "RIGHT";
-	//			break;
-	//		}
-	//	}
-	//	public void right() {
-	//		switch (facing){
-	//		case "RIGHT" :
-	//			facing = "DOWN";
-	//			break;
-	//		case "LEFT" :
-	//			facing = "UP";
-	//			break;
-	//		case "UP" :
-	//			facing = "RIGHT";
-	//			break;
-	//		case "DOWN" :
-	//			facing = "LEFT";
-	//			break;
-	//		}
-	//	}
 
 	public void rotate(boolean right){
 		if (right){
@@ -193,10 +85,10 @@ public class Player{
 		int code = e.getKeyCode();
 		if(isPrimary) {
 			if (code == KeyEvent.VK_UP) {
-				up();
+				vel = 3;
 			}
 			else if (code == KeyEvent.VK_DOWN) {
-				down();
+				vel = -3;
 			}
 			else if (code == KeyEvent.VK_LEFT) {
 				rotate(false);
@@ -211,10 +103,10 @@ public class Player{
 		}
 		else {
 			if (code == KeyEvent.VK_W) {
-				up();
+				vel = 3;
 			}
 			else if (code == KeyEvent.VK_S) {
-				down();
+				vel = -3;
 			}
 			else if (code == KeyEvent.VK_A) {
 				rotate(false);
@@ -222,7 +114,7 @@ public class Player{
 			else if (code == KeyEvent.VK_D) {
 				rotate(true);
 			}
-			else if (code == KeyEvent.VK_TAB) {
+			else if (code == KeyEvent.VK_X) {
 							Bullet bullet = new Bullet (direction, x, y, 9);
 								bullets.add(bullet);
 			}
