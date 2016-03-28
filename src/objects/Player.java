@@ -1,5 +1,4 @@
-package graphics;
-import java.awt.Color;
+package objects;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -9,15 +8,15 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
-public class PlayerTank extends JPanel implements ActionListener, KeyListener{
+public class Player extends JPanel implements ActionListener, KeyListener{
 	private Timer t = null;
 	private String facing = "";
 	private double x = 0;
@@ -28,16 +27,20 @@ public class PlayerTank extends JPanel implements ActionListener, KeyListener{
 	private Image tankS = null;
 	private Image tankE = null;
 	private Image tankW = null;
-	
+	private boolean isPrimary;
+
 	private List<Bullet> bullets;
 
-	public PlayerTank() {
+	public Player(int x, int y, String direction, boolean isPrimary) {
 		// change to enums
-		facing = "RIGHT";
+		this.x = x;
+		this.y = y;
+		facing = direction;
+		this.isPrimary = isPrimary;
 
 		try 
 		{
-			tankN = ImageIO.read(new File("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankN.png"));
+			tankN = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankN.png"));
 			tankS = ImageIO.read(new File("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankS.png"));
 			tankE = ImageIO.read(new File("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankE.png"));
 			tankW = ImageIO.read(new File("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankW.png"));
@@ -53,16 +56,12 @@ public class PlayerTank extends JPanel implements ActionListener, KeyListener{
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
-		
+
 		bullets = new ArrayList<>();
 	}
 
-
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 1024, 768);
-
 		switch (facing) {
 		case "RIGHT" :
 			g.drawImage(tankE, (int)x, (int)y, 40, 40, null);
@@ -81,10 +80,16 @@ public class PlayerTank extends JPanel implements ActionListener, KeyListener{
 			//redraw or rotate image
 			break;
 		}
-		for (Bullet bullet: bullets){
+
+		Iterator<Bullet> b = bullets.iterator();
+		while (b.hasNext()) {
+			Bullet bullet = b.next(); // must be called before you can call i.remove()
 			bullet.paint(g);
+
+			if(bullet.isOutOfBounds) {    
+				b.remove();
+			}
 		}
-		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -189,23 +194,41 @@ public class PlayerTank extends JPanel implements ActionListener, KeyListener{
 
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
-		if (code == KeyEvent.VK_UP) {
-			up();
+		if(isPrimary) {
+			if (code == KeyEvent.VK_UP) {
+				up();
+			}
+			else if (code == KeyEvent.VK_DOWN) {
+				down();
+			}
+			else if (code == KeyEvent.VK_LEFT) {
+				left();
+			}
+			else if (code == KeyEvent.VK_RIGHT) {
+				right();
+			}
+			else if (code == KeyEvent.VK_SPACE) {
+				Bullet bullet = new Bullet (facing, x, y);
+				bullets.add(bullet);
+			}
 		}
-		else if (code == KeyEvent.VK_DOWN) {
-			down();
-		}
-		else if (code == KeyEvent.VK_LEFT) {
-			left();
-		}
-		else if (code == KeyEvent.VK_RIGHT) {
-			right();
-		}
-		else if (code == KeyEvent.VK_SPACE) {
-			Bullet bullet = new Bullet (facing, x, y);
-			//add to the frame
-//			frame.add(bullet);
-			bullets.add(bullet);
+		else {
+			if (code == KeyEvent.VK_W) {
+				up();
+			}
+			else if (code == KeyEvent.VK_S) {
+				down();
+			}
+			else if (code == KeyEvent.VK_A) {
+				left();
+			}
+			else if (code == KeyEvent.VK_D) {
+				right();
+			}
+			else if (code == KeyEvent.VK_TAB) {
+				Bullet bullet = new Bullet (facing, x, y);
+				bullets.add(bullet);
+			}
 		}
 	}
 	public void keyTyped(KeyEvent e) {}
