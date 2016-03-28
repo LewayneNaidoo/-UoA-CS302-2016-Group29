@@ -17,8 +17,8 @@ public class CampaignGame extends JPanel implements ActionListener{
 
 	public CampaignGame(){
 		frame = new JFrame();
-		Player playerOne = new Player(0, 0, "RIGHT", true);
-		frame.add(playerOne);
+		Player playerOne = new Player(10, 10, 0, true);
+	//	frame.add(playerOne);
 		
 		frame.pack();
 		frame.setResizable(false);
