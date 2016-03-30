@@ -42,7 +42,7 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 
 		playerOne = new Player(20, 20, 0, true);
 		playerTwo = new Player(50, 50, 180, false);
-		//wall = new Walls(200, 200);
+		wall = new Walls();
 		
 		timer = new Timer(33, this);
 		timer.start(); 
@@ -60,16 +60,11 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 	private void doDrawing(Graphics g) {
 		playerOne.paint(g);
 		playerTwo.paint(g);
-		
-		for (int i=0;i<1024;i++){
-			int j = 0;
-			while (j==0 || j==768){
-		wall = new Walls(i,j);
 		wall.paint(g);
-			}
-		}
-		
-		
+//		for (int i=0;i<=1024;i+=48){
+//		wall = new Walls(i,0);
+//		wall.paint(g);
+//			}
 	}
 
 	@Override

@@ -21,6 +21,7 @@ public class MainMenu extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(150,0);
 		setSize(1024,768);
+		setResizable(false);
 
 //		JButton singlePlayer = new JButton("Campaign"); 
 //		singlePlayer.setOpaque(true);

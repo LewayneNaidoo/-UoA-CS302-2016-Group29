@@ -64,17 +64,17 @@ public class Player{
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
 		
-		if ((x > 900)){
-		   x = 900;
+		if ((x > 930)){
+		   x = 930;
 		}
-		if (x < 30 ){
-			   x = 30;
+		if (x < 48 ){
+			   x = 48;
 			}
-		if ((y > 700)){
-			   y = 700;
+		if ((y > 650)){
+			   y = 650;
 			}
-			if (y < 0){
-				   y = 0;
+			if (y < 48){
+				   y = 48;
 				}
 	}
 
