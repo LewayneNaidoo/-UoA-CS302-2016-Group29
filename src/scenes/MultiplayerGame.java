@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import generators.Walls;
 import objects.Player;
-import objects.Walls;
 
 public class MultiplayerGame extends JPanel implements ActionListener{
 
