@@ -48,6 +48,10 @@ public class Bullet extends JPanel implements ActionListener{
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
 		g.drawImage(bullet, (int)x, (int)y, 10, 10, null);
+		
+		
+		
+		
 	}
 
 	@Override
