@@ -63,6 +63,19 @@ public class Player{
 	public void move(){
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
+		
+		if ((x > 900)){
+		   x = 900;
+		}
+		if (x < 30 ){
+			   x = 30;
+			}
+		if ((y > 700)){
+			   y = 700;
+			}
+			if (y < 0){
+				   y = 0;
+				}
 	}
 
 
