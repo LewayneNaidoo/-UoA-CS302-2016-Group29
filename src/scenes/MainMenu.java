@@ -17,7 +17,7 @@ public class MainMenu extends JFrame implements ActionListener{
 		setTitle("Sabotage!");
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		setVisible(true);
-		setBackground(new Color(59, 89, 182));
+		setBackground(new Color(79, 79, 79));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(150,0);
 		setSize(1024,768);

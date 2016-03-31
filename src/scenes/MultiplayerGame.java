@@ -14,7 +14,7 @@ import javax.swing.Timer;
 
 import generators.WallPainter;
 import objects.Player;
-
+// http://opengameart.org/content/top-down-painted-tanks
 public class MultiplayerGame extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +50,7 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(new Color(59, 89, 182));
+		g.setColor(new Color( 0, 0, 0));
 		g.fillRect(0, 0, 1024, 768);
 		doDrawing(g);
 

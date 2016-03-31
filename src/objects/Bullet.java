@@ -12,8 +12,10 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class Bullet extends JPanel implements ActionListener{
-	private double x;
-	private double y;
+	public double x;
+	public double y;
+	public static int bounceCount = 0;
+	public static int hitTank = 0;
 	private Image bullet;
 	public boolean isOutOfBounds = false;
 	private double direction;
@@ -35,7 +37,7 @@ public class Bullet extends JPanel implements ActionListener{
 
 		try 
 		{
-			bullet = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankN.png"));
+			bullet = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\bullet.png"));
 		}
 		catch (IOException e)
 		{
@@ -54,20 +56,27 @@ public class Bullet extends JPanel implements ActionListener{
 		if ((x > 1000)){
 			vel = -vel;
 			direction = 360 - direction;
+			bounceCount++;
 		}
 		if (x < 12 ){
 			vel = -vel;
 			direction = 360 - direction;
+			bounceCount++;
 		}
 		if ((y > 730)){
 			vel = vel;
 			direction = 360 - direction;
+			bounceCount++;
 		}
 		if (y < 12){
 			vel = vel;
 			direction = 360 - direction;
+			bounceCount++;
 		}
-
+		
+		// TODO Compare location of bullet and location of tank, if same then hitTank++
+		// if hitTank = 1 in player class, paint explosion
+		
 		//		for (int i = 0; i <= 84; i++) 
 		//		    {
 		//		        for (int j = 0; j <= 61; j++) 

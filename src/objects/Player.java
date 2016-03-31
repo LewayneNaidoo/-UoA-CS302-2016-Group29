@@ -16,9 +16,10 @@ import javax.imageio.ImageIO;
 import generators.MapGenerator;
 
 public class Player{
-	private double x = 0;
-	private double y = 0;
+	public double x = 0;
+	public double y = 0;
 	private double vel = 0;
+	private Image explosion = null;
 	private Image originalTankImage = null;
 	private Image tank = null;
 	private boolean isPrimary;
@@ -35,7 +36,7 @@ public class Player{
 
 		try 
 		{
-			originalTankImage = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankE.png"));
+			originalTankImage = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerOneTank.png"));
 
 		}
 		catch (IOException e)
@@ -45,6 +46,14 @@ public class Player{
 
 		tank = createTransformedImage((BufferedImage) originalTankImage);
 		bullets = new ArrayList<>();
+		
+		try {
+			explosion = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\explosion.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public void paint(Graphics g) {
@@ -56,43 +65,45 @@ public class Player{
 			Bullet bullet = b.next(); // must be called before you can call i.remove()
 			bullet.paint(g);
 
-			if(bullet.isOutOfBounds) {    
+			if(bullet.isOutOfBounds || bullet.bounceCount>1 || bullet.hitTank == 1) { 
 				b.remove();
+				bullet.bounceCount = 0;
+				g.drawImage(explosion, 200, 200, 200, 200, null);
 			}
 		}
 	}
 
 	public void move(){
-		 int[][] wall_pos = MapGenerator.MapTwo();
-		
+		int[][] wall_pos = MapGenerator.MapTwo();
+
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
-		
+
 		if ((x > 966)){
-		   x = 966;
+			x = 966;
 		}
 		if (x < 12 ){
-			   x = 12;
-			}
+			x = 12;
+		}
 		if ((y > 686)){
-			   y = 686;
-			}
-			if (y < 12){
-				   y = 12;
-				}
-			
-//			for (int i = 0; i <= 84; i++) 
-//		    {
-//		        for (int j = 0; j <= 61; j++) 
-//		        {
-//		            if (wall_pos[i][j] == 1){
-//		            	if ((x == i*12) && (y == j*12)){
-//		            		x = i*12 - 6;
-//		            		y = j*12 - 6;
-//		            	}
-//		            } 
-//		        }
-//		    }		
+			y = 686;
+		}
+		if (y < 12){
+			y = 12;
+		}
+
+		//			for (int i = 0; i <= 84; i++) 
+		//		    {
+		//		        for (int j = 0; j <= 61; j++) 
+		//		        {
+		//		            if (wall_pos[i][j] == 1){
+		//		            	if ((x == i*12) && (y == j*12)){
+		//		            		x = i*12 - 6;
+		//		            		y = j*12 - 6;
+		//		            	}
+		//		            } 
+		//		        }
+		//		    }		
 	}
 
 
@@ -127,8 +138,8 @@ public class Player{
 				rotate(true);
 			}
 			else if (code == KeyEvent.VK_SPACE) {
-							Bullet bullet = new Bullet (direction, x, y, 9);
-							bullets.add(bullet);
+				Bullet bullet = new Bullet (direction, x, y, 9);
+				bullets.add(bullet);
 			}
 		}
 		else {
@@ -145,8 +156,8 @@ public class Player{
 				rotate(true);
 			}
 			else if (code == KeyEvent.VK_X) {
-							Bullet bullet = new Bullet (direction, x, y, 9);
-								bullets.add(bullet);
+				Bullet bullet = new Bullet (direction, x, y, 9);
+				bullets.add(bullet);
 			}
 		}
 	}
@@ -163,7 +174,7 @@ public class Player{
 		BufferedImage result = new BufferedImage(neww, newh, Transparency.TRANSLUCENT);
 		Graphics2D g2d = result.createGraphics();
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//		g2d.translate((neww - w), (newh - h));
+		//		g2d.translate((neww - w), (newh - h));
 		g2d.rotate(Math.toRadians(direction), w/2, h/2);
 		g2d.drawRenderedImage(image, null);
 		g2d.dispose();
@@ -177,7 +188,7 @@ public class Player{
 				vel = 0;
 			}
 		}
-		
+
 		else {
 			if (e.getKeyCode()==KeyEvent.VK_W || e.getKeyCode()==KeyEvent.VK_S){
 				vel = 0;
