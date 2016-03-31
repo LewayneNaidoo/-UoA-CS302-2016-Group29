@@ -23,7 +23,7 @@ public static int[][] MapOne() {
     }
 
     //add random walls
-    numbers[4][5] = 1;
+    //numbers[4][5] = 1;
 
     return numbers;
 }

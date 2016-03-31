@@ -22,7 +22,7 @@ public class MainMenu extends JFrame implements ActionListener{
 		setLocation(150,0);
 		setSize(1024,768);
 		setResizable(false);
-
+//
 //		JButton singlePlayer = new JButton("Campaign"); 
 //		singlePlayer.setOpaque(true);
 //		singlePlayer.setBackground(new Color(59, 89, 182));
@@ -46,7 +46,7 @@ public class MainMenu extends JFrame implements ActionListener{
 //						new MultiplayerGame();
 //					}
 //				});  
-//
+
 //		add(singlePlayer);
 //		add(multiPlayer);
 

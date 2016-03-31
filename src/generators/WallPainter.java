@@ -1,7 +1,5 @@
 package generators;
 
-import generators.MapGenerator;
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -10,11 +8,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class Walls extends JPanel{
+public class WallPainter extends JPanel{
 private static final long serialVersionUID = 1L;
 private Image wall = null;
-
-public Walls(){
+public WallPainter(){
     try {
         wall = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\wall.jpg"));
     } catch (IOException e) {
@@ -24,7 +21,7 @@ public Walls(){
 }
 
 public void paint(Graphics g) {
-    int[][] wall_pos = MapGenerator.MapTwo();
+    int[][] wall_pos = MapGenerator.MapOne();
 // MapGenerator();
 
     for (int x = 0; x <= 84; x++) 
@@ -33,7 +30,7 @@ public void paint(Graphics g) {
         {
             if (wall_pos[x][y] == 1){
                 g.drawImage(wall, x*12, y*12, 12, 12, null);
-            }
+            } 
         }
     }
 // //top border

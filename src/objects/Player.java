@@ -13,6 +13,8 @@ import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 
+import generators.MapGenerator;
+
 public class Player{
 	private double x = 0;
 	private double y = 0;
@@ -61,21 +63,36 @@ public class Player{
 	}
 
 	public void move(){
+		 int[][] wall_pos = MapGenerator.MapTwo();
+		
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
 		
-		if ((x > 930)){
-		   x = 930;
+		if ((x > 966)){
+		   x = 966;
 		}
-		if (x < 48 ){
-			   x = 48;
+		if (x < 12 ){
+			   x = 12;
 			}
-		if ((y > 650)){
-			   y = 650;
+		if ((y > 686)){
+			   y = 686;
 			}
-			if (y < 48){
-				   y = 48;
+			if (y < 12){
+				   y = 12;
 				}
+			
+//			for (int i = 0; i <= 84; i++) 
+//		    {
+//		        for (int j = 0; j <= 61; j++) 
+//		        {
+//		            if (wall_pos[i][j] == 1){
+//		            	if ((x == i*12) && (y == j*12)){
+//		            		x = i*12 - 6;
+//		            		y = j*12 - 6;
+//		            	}
+//		            } 
+//		        }
+//		    }		
 	}
 
 

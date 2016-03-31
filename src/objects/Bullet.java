@@ -44,14 +44,48 @@ public class Bullet extends JPanel implements ActionListener{
 	}
 
 	public void paint (Graphics g) {
+
+		//		int[][] wall_pos = MapGenerator.MapTwo();
+
 		System.out.println("X: " + x + " Y: " + y);
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
+
+		if ((x > 1000)){
+			vel = -vel;
+			direction = 360 - direction;
+		}
+		if (x < 12 ){
+			vel = -vel;
+			direction = 360 - direction;
+		}
+		if ((y > 730)){
+			vel = vel;
+			direction = 360 - direction;
+		}
+		if (y < 12){
+			vel = vel;
+			direction = 360 - direction;
+		}
+
+		//		for (int i = 0; i <= 84; i++) 
+		//		    {
+		//		        for (int j = 0; j <= 61; j++) 
+		//		        {
+		//		            if (wall_pos[i][j] == 1){
+		//		            	if ((x == i*12) && (y == j*12)){
+		//		            		x = 200;
+		//		            		y = 200;
+		//		            	}
+		//		            } 
+		//		        }
+		//		    }
+
 		g.drawImage(bullet, (int)x, (int)y, 10, 10, null);
-		
-		
-		
-		
+
+
+
+
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import generators.Walls;
+import generators.WallPainter;
 import objects.Player;
 
 public class MultiplayerGame extends JPanel implements ActionListener{
@@ -22,7 +22,7 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 	private Timer timer = null;
 	Player playerOne;
 	Player playerTwo;
-	Walls wall;
+	WallPainter wall;
 	
 	public MultiplayerGame(){
 		//    frame = new JFrame();
@@ -40,9 +40,9 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 		setFocusable(true);
 		setDoubleBuffered(true);
 
-		playerOne = new Player(20, 20, 0, true);
+		playerOne = new Player(400, 400, 0, true);
 		playerTwo = new Player(50, 50, 180, false);
-		wall = new Walls();
+		wall = new WallPainter();
 		
 		timer = new Timer(33, this);
 		timer.start(); 
