@@ -19,7 +19,7 @@ public class Bullet extends JPanel implements ActionListener{
 	public boolean isOutOfBounds = false;
 	private double direction;
 	private double vel;
-	
+
 	/**
 	 * The projectile of the tank
 	 * @param direction the direction the tank is facing
@@ -48,7 +48,7 @@ public class Bullet extends JPanel implements ActionListener{
 
 		//		int[][] wall_pos = MapGenerator.MapTwo();
 
-//		System.out.println("X: " + x + " Y: " + y);
+		//		System.out.println("X: " + x + " Y: " + y);
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
 
@@ -72,9 +72,9 @@ public class Bullet extends JPanel implements ActionListener{
 			direction = 360 - direction;
 			bounceCount++;
 		}
-		
-		
-		
+
+
+
 		//		for (int i = 0; i <= 84; i++) 
 		//		    {
 		//		        for (int j = 0; j <= 61; j++) 
@@ -94,10 +94,15 @@ public class Bullet extends JPanel implements ActionListener{
 
 
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) 
-	{
-		isOutOfBounds = true;
+	public int getX (){
+		return (int) x;
 	}
-}
+	public int getY (){
+		return (int)y;
+	}
+		@Override
+		public void actionPerformed(ActionEvent arg0) 
+		{
+			isOutOfBounds = true;
+		}
+	}

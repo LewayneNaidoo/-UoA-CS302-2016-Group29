@@ -68,20 +68,20 @@ public class Player{
 			Bullet bullet = b.next(); // must be called before you can call i.remove()
 			bullet.paint(g);
 
-			if(bullet.isOutOfBounds || bullet.bounceCount>1) { 
-				
+			if(bullet.isOutOfBounds || bullet.bounceCount>1 || MultiplayerGame.hitTank == 1) { 
 				b.remove();
 				bullet.bounceCount = 0;
+				MultiplayerGame.hitTank = 0;
 				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
 			}
-			if (x+20 > bullet.x && bullet.x > x-20){
-				if (y+20 > bullet.y && bullet.y > y-20){
-//				hitTank++;
-				System.out.println("Tank hit!");
-//				b.remove();
-//				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
-			}
-			}
+//			if (x+20 > bullet.x && bullet.x > x-20){
+//				if (y+20 > bullet.y && bullet.y > y-20){
+////				hitTank++;
+//				System.out.println("Tank hit!");
+////				b.remove();
+////				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
+//			}
+//			}
 		}
 	}
 

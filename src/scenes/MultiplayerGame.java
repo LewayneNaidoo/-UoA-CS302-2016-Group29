@@ -1,18 +1,21 @@
 package scenes;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import generators.WallPainter;
+import objects.Bullet;
 import objects.Player;
 // http://opengameart.org/content/top-down-painted-tanks
 public class MultiplayerGame extends JPanel implements ActionListener{
@@ -22,6 +25,7 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 	Player playerOne;
 	Player playerTwo;
 	WallPainter wall;
+	public static int hitTank = 0;
 	
 	public MultiplayerGame(){
 		    frame = new JFrame();
@@ -66,6 +70,39 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 //		wall = new Walls(i,0);
 //		wall.paint(g);
 //			}
+		ArrayList<Bullet> playerOneBullet = playerOne.getBullets();
+		ArrayList<Bullet> playerTwoBullet = playerTwo.getBullets();
+		
+		for (Bullet bullet: playerOneBullet){
+			if (playerOne.x+20 > bullet.getX() && bullet.getX() > playerOne.x-20){
+				if (playerOne.y+20 > bullet.getY() && bullet.getY() > playerOne.y-20){
+					hitTank++;
+					System.out.println("Tank hit!");
+				}
+			}
+			if (playerTwo.x+20 > bullet.getX() && bullet.getX() > playerTwo.x-20){
+				if (playerTwo.y+20 > bullet.getY() && bullet.getY() > playerTwo.y-20){
+					hitTank++;
+					System.out.println("Tank hit!");
+				}
+			}
+			
+		}
+		for (Bullet bullet: playerTwoBullet){
+			if (playerOne.x+20 > bullet.getX() && bullet.getX() > playerOne.x-20){
+				if (playerOne.y+20 > bullet.getY() && bullet.getY() > playerOne.y-20){
+					hitTank++;
+					System.out.println("Tank hit!");
+				}
+			}
+			if (playerTwo.x+20 > bullet.getX() && bullet.getX() > playerTwo.x-20){
+				if (playerTwo.y+20 > bullet.getY() && bullet.getY() > playerTwo.y-20){
+					hitTank++;
+					System.out.println("Tank hit!");
+				}
+			}
+			
+		}
 	}
 
 	@Override
