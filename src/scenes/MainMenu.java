@@ -5,13 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class MainMenu extends JFrame implements ActionListener{
-	public MainMenu() {
-		
+	 
+//	private JButton campaign = new JButton("Campaign");
+//	private JButton multiplayer = new JButton("Multiplayer");
+//	private JButton training = new JButton("Training");
+	public MainMenu()
+	{   
 		add(new MultiplayerGame());
 		
 		setTitle("Sabotage!");
@@ -22,41 +25,62 @@ public class MainMenu extends JFrame implements ActionListener{
 		setLocation(150,0);
 		setSize(1024,768);
 		setResizable(false);
+	
+//		JFrame frame = new JFrame("SABOTAGE!");
+//		JPanel panel = new JPanel();
 //
-//		JButton singlePlayer = new JButton("Campaign"); 
-//		singlePlayer.setOpaque(true);
-//		singlePlayer.setBackground(new Color(59, 89, 182));
-//		singlePlayer.setFocusPainted(false);
-//		singlePlayer.addActionListener(
-//				new ActionListener(){
-//					public void actionPerformed(ActionEvent e){
-//						setVisible(false); 
-//						new CampaignGame();
-//					}
-//				}); 
+//		frame.setSize(1024,768);
+//		frame.setLocation(150,0);
+//		frame.setResizable(false);
+//		frame.setVisible(true);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		campaign.addActionListener(
+//								new ActionListener(){
+//									public void actionPerformed(ActionEvent e){
+//										setVisible(true); 
+//										new CampaignGame();
+//									}
+//								}); 
 //
-//		JButton multiPlayer = new JButton("Multiplayer");
-//		multiPlayer.setOpaque(true);
-//		multiPlayer.setBackground(new Color(59, 89, 182));
-//		multiPlayer.setFocusPainted(false);
-//		multiPlayer.addActionListener(
-//				new ActionListener(){
-//					public void actionPerformed(ActionEvent e){
-//						setVisible(false);
-//						new MultiplayerGame();
-//					}
-//				});  
-
-//		add(singlePlayer);
-//		add(multiPlayer);
-
+//		multiplayer = new JButton("Multiplayer");
+//		multiplayer.addActionListener(this);
+//		multiplayer.setActionCommand("Open");
+//        add(multiplayer);
+//        pack();
+		
+//		frame.add(campaign);
+//		frame.add(multiplayer);
+//		frame.add(training);
+		
+		//frame.setContentPane(new JLabel(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\logo.png")));
+		//frame.setBackground(new Color(79, 79, 79));
+		//frame.setIconImage("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\logo.png");
+//		frame.setLayout(new FlowLayout());
+//		frame.setSize(1024,768);
+		
+//					add(singlePlayer);
+//				add(multiPlayer);
 	}
 	public static void main(String[] args) { 
-		new MainMenu(); 
+		new MainMenu();
+//		SwingUtilities.invokeLater(new Runnable(){
+//
+//            @Override
+//            public void run()
+//            {
+//                new MainMenu().setVisible(true);
+//            }
+//
+//        });
 	} 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-
+//		 String cmd = e.getActionCommand();
+//
+//	        if(cmd.equals("Open"))
+//	        {
+//	            dispose();
+//	            new MultiplayerGame();
+//	        }
 	}
 }

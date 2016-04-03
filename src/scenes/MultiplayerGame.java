@@ -16,7 +16,6 @@ import generators.WallPainter;
 import objects.Player;
 // http://opengameart.org/content/top-down-painted-tanks
 public class MultiplayerGame extends JPanel implements ActionListener{
-
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private Timer timer = null;
@@ -25,27 +24,30 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 	WallPainter wall;
 	
 	public MultiplayerGame(){
-		//    frame = new JFrame();
-		//    Player playerOne = new Player(0, 0, 90, true);
-		//    Player playerTwo = new Player(900, 600, 270, false);
-		//    frame.add(playerOne);
-		//    frame.add(playerTwo);
-		//    frame.pack();
-		//    frame.setResizable(false);
-		//
-		//    frame.setVisible(true);
-		//    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//    frame.setSize(1024,768);
+		    frame = new JFrame();
+//		    Player playerOne = new Player(0, 0, 90, true);
+//		    Player playerTwo = new Player(900, 600, 270, false);
+//		    frame.add(playerOne);
+//		    frame.add(playerTwo);
+		    frame.pack();
+			frame.setResizable(false);
+
+			frame.setVisible(true);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setLocation(150,0);
+			frame.setSize(1024,768);
 		addKeyListener(new TAdapter());
 		setFocusable(true);
 		setDoubleBuffered(true);
 
-		playerOne = new Player(400, 400, 0, true);
-		playerTwo = new Player(50, 50, 180, false);
+		playerOne = new Player(400, 400, 270, true);
+		playerTwo = new Player(200, 200, 90, false);
 		wall = new WallPainter();
 		
 		timer = new Timer(33, this);
 		timer.start(); 
+		
+		
 	}
 
 	public void paintComponent(Graphics g) {
@@ -53,7 +55,6 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 		g.setColor(new Color( 0, 0, 0));
 		g.fillRect(0, 0, 1024, 768);
 		doDrawing(g);
-
         Toolkit.getDefaultToolkit().sync();
 	}
 

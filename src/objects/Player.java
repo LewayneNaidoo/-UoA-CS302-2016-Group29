@@ -14,6 +14,7 @@ import java.util.Iterator;
 import javax.imageio.ImageIO;
 
 import generators.MapGenerator;
+import scenes.MultiplayerGame;
 
 public class Player{
 	public double x = 0;
@@ -24,6 +25,8 @@ public class Player{
 	private Image tank = null;
 	private boolean isPrimary;
 	private double direction;
+	private int hitTank = 0;
+
 
 	private ArrayList<Bullet> bullets;
 
@@ -65,10 +68,19 @@ public class Player{
 			Bullet bullet = b.next(); // must be called before you can call i.remove()
 			bullet.paint(g);
 
-			if(bullet.isOutOfBounds || bullet.bounceCount>1 || bullet.hitTank == 1) { 
+			if(bullet.isOutOfBounds || bullet.bounceCount>1) { 
+				
 				b.remove();
 				bullet.bounceCount = 0;
-				g.drawImage(explosion, 200, 200, 200, 200, null);
+				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
+			}
+			if (x+20 > bullet.x && bullet.x > x-20){
+				if (y+20 > bullet.y && bullet.y > y-20){
+//				hitTank++;
+				System.out.println("Tank hit!");
+//				b.remove();
+//				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
+			}
 			}
 		}
 	}
@@ -78,7 +90,8 @@ public class Player{
 
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
-
+//		System.out.println("Xtank: " + x + "Ytank: " + y);
+		
 		if ((x > 966)){
 			x = 966;
 		}
@@ -91,7 +104,6 @@ public class Player{
 		if (y < 12){
 			y = 12;
 		}
-
 		//			for (int i = 0; i <= 84; i++) 
 		//		    {
 		//		        for (int j = 0; j <= 61; j++) 
@@ -138,7 +150,7 @@ public class Player{
 				rotate(true);
 			}
 			else if (code == KeyEvent.VK_SPACE) {
-				Bullet bullet = new Bullet (direction, x, y, 9);
+				Bullet bullet = new Bullet (direction, x, y, 9); //TODO fire at barrel, work out angles
 				bullets.add(bullet);
 			}
 		}
@@ -164,7 +176,8 @@ public class Player{
 
 
 	public BufferedImage createTransformedImage(BufferedImage image) {
-		System.out.println(direction);
+//		System.out.println(direction);
+//		System.out.println("Xtank: " + x + "Ytank: " + y);
 		double sin = Math.abs(Math.sin(direction));
 		double cos = Math.abs(Math.cos(direction));
 		int w = image.getWidth();

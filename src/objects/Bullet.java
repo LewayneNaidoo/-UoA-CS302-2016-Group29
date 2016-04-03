@@ -15,12 +15,11 @@ public class Bullet extends JPanel implements ActionListener{
 	public double x;
 	public double y;
 	public static int bounceCount = 0;
-	public static int hitTank = 0;
 	private Image bullet;
 	public boolean isOutOfBounds = false;
 	private double direction;
 	private double vel;
-
+	
 	/**
 	 * The projectile of the tank
 	 * @param direction the direction the tank is facing
@@ -49,7 +48,7 @@ public class Bullet extends JPanel implements ActionListener{
 
 		//		int[][] wall_pos = MapGenerator.MapTwo();
 
-		System.out.println("X: " + x + " Y: " + y);
+//		System.out.println("X: " + x + " Y: " + y);
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
 
@@ -74,8 +73,7 @@ public class Bullet extends JPanel implements ActionListener{
 			bounceCount++;
 		}
 		
-		// TODO Compare location of bullet and location of tank, if same then hitTank++
-		// if hitTank = 1 in player class, paint explosion
+		
 		
 		//		for (int i = 0; i <= 84; i++) 
 		//		    {

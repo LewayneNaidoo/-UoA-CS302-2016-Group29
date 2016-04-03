@@ -17,7 +17,7 @@ public class CampaignGame extends JPanel implements ActionListener{
 
 	public CampaignGame(){
 		frame = new JFrame();
-		Player playerOne = new Player(10, 10, 0, true);
+//		Player playerOne = new Player(10, 10, 0, true);
 	//	frame.add(playerOne);
 		
 		frame.pack();
@@ -31,7 +31,7 @@ public class CampaignGame extends JPanel implements ActionListener{
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(new Color(59, 89, 182));
+		g.setColor(new Color(0, 0, 0));
 		g.fillRect(0, 0, 1024, 768);
 	}
 
