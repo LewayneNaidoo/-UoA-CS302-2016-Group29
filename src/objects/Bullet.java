@@ -31,8 +31,8 @@ public class Bullet extends JPanel implements ActionListener{
 		t.start();
 		this.vel = vel;
 		this.direction = direction;
-		this.x = x+12;
-		this.y = y+12;
+		this.x = x+20;
+		this.y = y+20;
 
 		try 
 		{
@@ -88,7 +88,7 @@ public class Bullet extends JPanel implements ActionListener{
 		//		        }
 		//		    }
 
-		g.drawImage(bullet, (int)x, (int)y, 10, 10, null);
+		g.drawImage(bullet, (int)x, (int)y, 8, 8, null);
 
 
 

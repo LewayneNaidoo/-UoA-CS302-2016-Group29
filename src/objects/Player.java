@@ -49,7 +49,7 @@ public class Player{
 
 		tank = createTransformedImage((BufferedImage) originalTankImage);
 		bullets = new ArrayList<>();
-		
+
 		try {
 			explosion = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\explosion.png"));
 		} catch (IOException e) {
@@ -74,14 +74,14 @@ public class Player{
 				MultiplayerGame.hitTank = 0;
 				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
 			}
-//			if (x+20 > bullet.x && bullet.x > x-20){
-//				if (y+20 > bullet.y && bullet.y > y-20){
-////				hitTank++;
-//				System.out.println("Tank hit!");
-////				b.remove();
-////				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
-//			}
-//			}
+			//			if (x+20 > bullet.x && bullet.x > x-20){
+			//				if (y+20 > bullet.y && bullet.y > y-20){
+			////				hitTank++;
+			//				System.out.println("Tank hit!");
+			////				b.remove();
+			////				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
+			//			}
+			//			}
 		}
 	}
 
@@ -90,8 +90,19 @@ public class Player{
 
 		x += vel*Math.cos(Math.toRadians(direction));
 		y += vel*Math.sin(Math.toRadians(direction));
-//		System.out.println("Xtank: " + x + "Ytank: " + y);
-		
+		//		System.out.println("Xtank: " + x + "Ytank: " + y);
+
+//		for (int i=0; i<=85;i++ ){
+//			for (int j=0; j<=64;j++){
+////				double prevX = x;
+////				double prevY = y;
+//				if (wall_pos[i][j] == 1 && x > i*12 - 20 && i*12 + 20 > x && y > j*12 - 20 && y < j*12 + 20){
+//						System.out.println("hitWall!");
+//				}
+//			}
+//		}
+
+
 		if ((x > 966)){
 			x = 966;
 		}
@@ -168,16 +179,22 @@ public class Player{
 				rotate(true);
 			}
 			else if (code == KeyEvent.VK_X) {
-				Bullet bullet = new Bullet (direction, x, y, 9);
-				bullets.add(bullet);
+				if (direction > 67.5 && direction < 202.5){
+					Bullet bullet = new Bullet (direction, x, y, 9);
+					bullets.add(bullet);
+				}
+				else{
+					Bullet bullet = new Bullet (direction, x, y, 9);
+					bullets.add(bullet);
+				}
 			}
 		}
 	}
 
 
 	public BufferedImage createTransformedImage(BufferedImage image) {
-//		System.out.println(direction);
-//		System.out.println("Xtank: " + x + "Ytank: " + y);
+		//		System.out.println(direction);
+		//		System.out.println("Xtank: " + x + "Ytank: " + y);
 		double sin = Math.abs(Math.sin(direction));
 		double cos = Math.abs(Math.cos(direction));
 		int w = image.getWidth();
