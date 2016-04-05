@@ -25,10 +25,10 @@ public class Player{
 	private Image tank = null;
 	private boolean isPrimary;
 	private double direction;
-	private int hitTank = 0;
+	private boolean bulletToExplode = false;
 
 
-	private ArrayList<Bullet> bullets;
+	private Bullet bullet;
 
 	public Player(int x, int y, double direction, boolean isPrimary) {
 		// change to enums
@@ -48,7 +48,7 @@ public class Player{
 		}
 
 		tank = createTransformedImage((BufferedImage) originalTankImage);
-		bullets = new ArrayList<>();
+		bullet = null;
 
 		try {
 			explosion = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\explosion.png"));
@@ -63,57 +63,54 @@ public class Player{
 
 		g.drawImage(tank, (int)x, (int)y, 48, 48, null);
 
-		Iterator<Bullet> b = bullets.iterator();
-		while (b.hasNext()) {
-			Bullet bullet = b.next(); // must be called before you can call i.remove()
+		//		Iterator<Bullet> b = bullets.iterator();
+		//		while (b.hasNext()) {
+		//			Bullet bullet = b.next(); // must be called before you can call i.remove()
+
+		if(bullet!=null){
 			bullet.paint(g);
 
-			if(bullet.isOutOfBounds || bullet.bounceCount>1 || MultiplayerGame.hitTank == 1) { 
-				b.remove();
-				bullet.bounceCount = 0;
-				MultiplayerGame.hitTank = 0;
+			if(bullet.isOutOfBounds || bullet.bounceCount>1 || bulletToExplode) { 
+				//				bullet.bounceCount = 0;
+				bulletToExplode = false;
 				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
+				bullet = null;
 			}
-			//			if (x+20 > bullet.x && bullet.x > x-20){
-			//				if (y+20 > bullet.y && bullet.y > y-20){
-			////				hitTank++;
-			//				System.out.println("Tank hit!");
-			////				b.remove();
-			////				g.drawImage(explosion, (int)bullet.x, (int)bullet.y, 40, 40, null);
-			//			}
-			//			}
 		}
 	}
+	//	}
 
 	public void move(){
 		int[][] wall_pos = MapGenerator.MapTwo();
-
-		x += vel*Math.cos(Math.toRadians(direction));
-		y += vel*Math.sin(Math.toRadians(direction));
 		//		System.out.println("Xtank: " + x + "Ytank: " + y);
 
-//		for (int i=0; i<=85;i++ ){
-//			for (int j=0; j<=64;j++){
-////				double prevX = x;
-////				double prevY = y;
-//				if (wall_pos[i][j] == 1 && x > i*12 - 20 && i*12 + 20 > x && y > j*12 - 20 && y < j*12 + 20){
-//						System.out.println("hitWall!");
-//				}
-//			}
-//		}
+		double xTemp = x + vel*Math.cos(Math.toRadians(direction));
+		double yTemp = y + vel*Math.sin(Math.toRadians(direction));
 
 
-		if ((x > 966)){
-			x = 966;
+		for (int i=0; i<85;i++ ){
+			for (int j=0; j<64;j++){
+				//				double prevX = x;
+				//				double prevY = y;
+				if (wall_pos[i][j] == 1 && xTemp > i*12 - 48 && xTemp < i*12 + 12  && yTemp > j*12 - 48 && yTemp < j*12 + 12){
+					System.out.println("hitWall!");
+					return;
+				}
+			}
 		}
-		if (x < 12 ){
-			x = 12;
+
+
+		if ((xTemp > 966)){
+			xTemp = 966;
 		}
-		if ((y > 686)){
-			y = 686;
+		if (xTemp < 12 ){
+			xTemp = 12;
 		}
-		if (y < 12){
-			y = 12;
+		if ((yTemp > 686)){
+			yTemp = 686;
+		}
+		if (yTemp < 12){
+			yTemp = 12;
 		}
 		//			for (int i = 0; i <= 84; i++) 
 		//		    {
@@ -127,6 +124,11 @@ public class Player{
 		//		            } 
 		//		        }
 		//		    }		
+
+
+		x = xTemp;
+		y = yTemp;
+
 	}
 
 
@@ -161,8 +163,10 @@ public class Player{
 				rotate(true);
 			}
 			else if (code == KeyEvent.VK_SPACE) {
-				Bullet bullet = new Bullet (direction, x, y, 9); //TODO fire at barrel, work out angles
-				bullets.add(bullet);
+				if(bullet==null){
+					bullet = new Bullet (direction, x, y, 9); //TODO fire at barrel, work out angles
+					//				bullets.add(bullet);
+				}
 			}
 		}
 		else {
@@ -179,14 +183,16 @@ public class Player{
 				rotate(true);
 			}
 			else if (code == KeyEvent.VK_X) {
-				if (direction > 67.5 && direction < 202.5){
-					Bullet bullet = new Bullet (direction, x, y, 9);
-					bullets.add(bullet);
+				//				if (direction > 67.5 && direction < 202.5){
+				if (bullet == null){
+					bullet = new Bullet (direction, x, y, 9);
 				}
-				else{
-					Bullet bullet = new Bullet (direction, x, y, 9);
-					bullets.add(bullet);
-				}
+				//					bullets.add(bullet);
+				//				}
+				//				else{
+				//					Bullet bullet = new Bullet (direction, x, y, 9);
+				//					bullets.add(bullet);
+				//				}
 			}
 		}
 	}
@@ -231,10 +237,17 @@ public class Player{
 	public double getY (){
 		return y;
 	}
-	public ArrayList<Bullet> getBullets(){
-		return bullets;
-	}
+	//	public ArrayList<Bullet> getBullets(){
+	//		return bullets;
+	//	}
 	public Image getImage(){
 		return tank;
+	}
+
+	public void setBulletToExplode(){
+		bulletToExplode = true;
+	}
+	public Bullet getBullet(){
+		return bullet;
 	}
 }

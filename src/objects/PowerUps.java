@@ -2,13 +2,17 @@ package objects;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class PowerUps extends JPanel{
+	
 	public double x;
 	public double y;
 	static int shield = 0;
@@ -16,10 +20,13 @@ public class PowerUps extends JPanel{
 	static int bulletSpeed = 0;
 	static int tankSlow = 0;
 	static int bulletSlow = 0;
+	public static int powerUpConsumed = 0;
 	
 	private static Image powerup = null;
 	
 	public PowerUps(int x, int y){
+//		Timer t = new Timer(10000, (ActionListener) this);
+//		t.start();
 		this.x = x;
 		this.y = y;
 		try {
@@ -27,6 +34,7 @@ public class PowerUps extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 

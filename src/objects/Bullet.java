@@ -14,7 +14,7 @@ import javax.swing.Timer;
 public class Bullet extends JPanel implements ActionListener{
 	public double x;
 	public double y;
-	public static int bounceCount = 0;
+	public int bounceCount = 0;
 	private Image bullet;
 	public boolean isOutOfBounds = false;
 	private double direction;
@@ -31,8 +31,8 @@ public class Bullet extends JPanel implements ActionListener{
 		t.start();
 		this.vel = vel;
 		this.direction = direction;
-		this.x = x+20;
-		this.y = y+20;
+		this.x = x + 24 + 55*Math.cos(Math.toRadians(direction));
+		this.y = y + 24 + 55*Math.sin(Math.toRadians(direction));
 
 		try 
 		{
@@ -63,12 +63,10 @@ public class Bullet extends JPanel implements ActionListener{
 			bounceCount++;
 		}
 		if ((y > 730)){
-			vel = vel;
 			direction = 360 - direction;
 			bounceCount++;
 		}
 		if (y < 12){
-			vel = vel;
 			direction = 360 - direction;
 			bounceCount++;
 		}

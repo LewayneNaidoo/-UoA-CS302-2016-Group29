@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,12 +25,14 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private Timer timer = null;
-//	private Timer PUTimer = null;
+	//	private Timer PUTimer = null;
 	Player playerOne;
 	Player playerTwo;
 	WallPainter wall;
-	PowerUps powerUp;
+	PowerUps powerUps;
 	public static int hitTank = 0;
+
+	//	private ArrayList powerUps;
 
 	public MultiplayerGame(){
 		frame = new JFrame();
@@ -50,17 +54,17 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 		playerOne = new Player(400, 400, 270, true);
 		playerTwo = new Player(200, 200, 90, false);
 		wall = new WallPainter();
-		
 		//TODO add in timer for 10 second gaps
+		//		powerUps = new ArrayList();
 		double k = Math.random()*1000+20;
 		double l = Math.random()*750+20;
-		powerUp = new PowerUps((int)k, (int)l);
+		powerUps = new PowerUps((int)k, (int)l);
 
 		timer = new Timer(33, this);
 		timer.start(); 
 
-//		PUTimer = new Timer(0, this);
-//		PUTimer.start();
+		//		PUTimer = new Timer(0, this);
+		//		PUTimer.start();
 
 
 	}
@@ -71,77 +75,93 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 		g.fillRect(0, 0, 1024, 768);
 		doDrawing(g);
 		Toolkit.getDefaultToolkit().sync();
+
+		//		Iterator<PowerUps> p = ((List<PowerUps>) powerUps).iterator();
+		//		while (p.hasNext()) {
+		//			PowerUps powerUp = p.next(); // must be called before you can call i.remove()
+		//			
+		//			powerUp.paint(g);
+		//
+		//			if(PowerUps.powerUpConsumed == 1) { 
+		//				p.remove();
+		//				PowerUps.powerUpConsumed = 0;
+		//				// Give tank powerUp, animation
+		//			}
+		//		}
 	}
 
 	private void doDrawing(Graphics g) {
 		playerOne.paint(g);
 		playerTwo.paint(g);
 		wall.paint(g);
-		
+
 		//TODO add in timer for 10 second gaps
-		powerUp.paint(g);
-		
-		if (powerUp.getX()+12 > playerOne.x && playerOne.x > powerUp.getX()-12){
-			if (powerUp.getY()+12 > playerOne.y && playerOne.y > powerUp.getY()-12){
+		powerUps.paint(g);
+
+		if (powerUps.getX()+12 > playerOne.x && playerOne.x > powerUps.getX()-12){
+			if (powerUps.getY()+12 > playerOne.y && playerOne.y > powerUps.getY()-12){
 				PowerUps.randomPowerUp();
 				System.out.println("hit powerup!");
+				PowerUps.powerUpConsumed = 1;
 			}
 		}
-		if (powerUp.getX()+12 > playerTwo.x && playerTwo.x > powerUp.getX()-12){
-			if (powerUp.getY()+12 > playerTwo.y && playerTwo.y > powerUp.getY()-12){
+		if (powerUps.getX()+12 > playerTwo.x && playerTwo.x > powerUps.getX()-12){
+			if (powerUps.getY()+12 > playerTwo.y && playerTwo.y > powerUps.getY()-12){
 				PowerUps.randomPowerUp();
 				System.out.println("hit powerup!");
+				PowerUps.powerUpConsumed = 1;
 			}
 		}
 
-		
+
 		//		for (int i=0;i<=1024;i+=48){
 		//		wall = new Walls(i,0);
 		//		wall.paint(g);
 		//			}
-		ArrayList<Bullet> playerOneBullet = playerOne.getBullets();
-		ArrayList<Bullet> playerTwoBullet = playerTwo.getBullets();
-
-		for (Bullet bullet: playerOneBullet){
-			if (playerOne.x+20 > bullet.getX() && bullet.getX() > playerOne.x-20){
-				if (playerOne.y+20 > bullet.getY() && bullet.getY() > playerOne.y-20){
+		Bullet playerOneBullet = playerOne.getBullet();
+		if(playerOneBullet!=null){
+			if (playerOne.x+20 > playerOneBullet.getX() && playerOneBullet.getX() > playerOne.x-20){
+				if (playerOne.y+20 > playerOneBullet.getY() && playerOneBullet.getY() > playerOne.y-20){
 					hitTank++;
+					playerOne.setBulletToExplode();
 					System.out.println("Tank hit!");
 				}
 			}
-			if (playerTwo.x+20 > bullet.getX() && bullet.getX() > playerTwo.x-20){
-				if (playerTwo.y+20 > bullet.getY() && bullet.getY() > playerTwo.y-20){
+			if (playerTwo.x+20 > playerOneBullet.getX() && playerOneBullet.getX() > playerTwo.x-20){
+				if (playerTwo.y+20 > playerOneBullet.getY() && playerOneBullet.getY() > playerTwo.y-20){
 					hitTank++;
+					playerOne.setBulletToExplode();
 					System.out.println("Tank hit!");
 				}
 			}
-
 		}
-		for (Bullet bullet: playerTwoBullet){
-			if (playerOne.x+20 > bullet.getX() && bullet.getX() > playerOne.x-20){
-				if (playerOne.y+20 > bullet.getY() && bullet.getY() > playerOne.y-20){
+		Bullet playerTwoBullet = playerTwo.getBullet();
+		if (playerTwoBullet!=null){
+			if (playerOne.x+20 > playerTwoBullet.getX() && playerTwoBullet.getX() > playerOne.x-20){
+				if (playerOne.y+20 > playerTwoBullet.getY() && playerTwoBullet.getY() > playerOne.y-20){
 					hitTank++;
+					playerTwo.setBulletToExplode();
 					System.out.println("Tank hit!");
 				}
 			}
-			if (playerTwo.x+20 > bullet.getX() && bullet.getX() > playerTwo.x-20){
-				if (playerTwo.y+20 > bullet.getY() && bullet.getY() > playerTwo.y-20){
+			if (playerTwo.x+20 > playerTwoBullet.getX() && playerTwoBullet.getX() > playerTwo.x-20){
+				if (playerTwo.y+20 > playerTwoBullet.getY() && playerTwoBullet.getY() > playerTwo.y-20){
 					hitTank++;
+					playerTwo.setBulletToExplode();
 					System.out.println("Tank hit!");
 				}
 			}
-
 		}
-//		Timer PUTimer = new Timer(5000, new ActionListener() {
-//			  @Override
-//			  public void actionPerformed(ActionEvent arg0) {
-//					powerUp = new PowerUps();
-//	        		powerUp.paint(g);
-//	        		System.out.println("power up!");
-//			  }
-//			});
-//			PUTimer.setRepeats(false); 
-//			PUTimer.start();
+		//		Timer PUTimer = new Timer(5000, new ActionListener() {
+		//			  @Override
+		//			  public void actionPerformed(ActionEvent arg0) {
+		//					powerUp = new PowerUps();
+		//	        		powerUp.paint(g);
+		//	        		System.out.println("power up!");
+		//			  }
+		//			});
+		//			PUTimer.setRepeats(false); 
+		//			PUTimer.start();
 	}
 
 
