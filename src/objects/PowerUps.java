@@ -24,6 +24,11 @@ public class PowerUps extends JPanel{
 	
 	private static Image powerup = null;
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public PowerUps(int x, int y){
 //		Timer t = new Timer(10000, (ActionListener) this);
 //		t.start();

@@ -73,6 +73,8 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 		super.paintComponent(g);
 		g.setColor(new Color( 0, 0, 0));
 		g.fillRect(0, 0, 1024, 768);
+		g.setColor(new Color( 55, 55, 55));
+		g.fillRect(0, 0, 1024, 60);
 		doDrawing(g);
 		Toolkit.getDefaultToolkit().sync();
 

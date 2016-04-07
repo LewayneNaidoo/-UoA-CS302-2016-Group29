@@ -151,10 +151,22 @@ public class Player{
 		int code = e.getKeyCode();
 		if(isPrimary) {
 			if (code == KeyEvent.VK_UP) {
-				vel = 3;
+//				if (tankSpeed){
+//					vel = 4.5;
+//				}else if (tankSlow){
+//					vel = 1.5;
+//				}else{
+					vel = 3;
+//				}
 			}
 			else if (code == KeyEvent.VK_DOWN) {
-				vel = -3;
+//				if (tankSpeed){
+//					vel = -4.5;
+//				}else if (tankSlow){
+//					vel = -1.5;
+//				}else{
+					vel = -3;
+//				}
 			}
 			else if (code == KeyEvent.VK_LEFT) {
 				rotate(false);
@@ -163,18 +175,36 @@ public class Player{
 				rotate(true);
 			}
 			else if (code == KeyEvent.VK_SPACE) {
-				if(bullet==null){
-					bullet = new Bullet (direction, x, y, 9); //TODO fire at barrel, work out angles
-					//				bullets.add(bullet);
+				if (bullet == null){
+//					if (bulletSpeed){
+//						bullet = new Bullet (direction, x, y, 9*1.5);
+//					}else if (bulletSlow){
+//						bullet = new Bullet (direction, x, y, 9*0.5);
+//					}else{
+						bullet = new Bullet (direction, x, y, 9);
+//					}
+					
 				}
 			}
 		}
 		else {
 			if (code == KeyEvent.VK_W) {
-				vel = 3;
+//				if (tankSpeed){
+//					vel = 4.5;
+//				}else if (tankSlow){
+//					vel = 1.5;
+//				}else{
+					vel = 3;
+//				}
 			}
 			else if (code == KeyEvent.VK_S) {
-				vel = -3;
+//				if (tankSpeed){
+//					vel = -4.5;
+//				}else if (tankSlow){
+//					vel = -1.5;
+//				}else{
+					vel = -3;
+//				}
 			}
 			else if (code == KeyEvent.VK_A) {
 				rotate(false);
@@ -185,7 +215,14 @@ public class Player{
 			else if (code == KeyEvent.VK_X) {
 				//				if (direction > 67.5 && direction < 202.5){
 				if (bullet == null){
-					bullet = new Bullet (direction, x, y, 9);
+//					if (bulletSpeed){
+//						bullet = new Bullet (direction, x, y, 9*1.5);
+//					}else if (bulletSlow){
+//						bullet = new Bullet (direction, x, y, 9*0.5);
+//					}else{
+						bullet = new Bullet (direction, x, y, 9);
+					}
+					
 				}
 				//					bullets.add(bullet);
 				//				}
@@ -193,7 +230,7 @@ public class Player{
 				//					Bullet bullet = new Bullet (direction, x, y, 9);
 				//					bullets.add(bullet);
 				//				}
-			}
+//			}
 		}
 	}
 

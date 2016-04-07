@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import generators.MapGenerator;
+
 @SuppressWarnings("serial")
 public class Bullet extends JPanel implements ActionListener{
 	public double x;
@@ -46,30 +48,47 @@ public class Bullet extends JPanel implements ActionListener{
 
 	public void paint (Graphics g) {
 
-		//		int[][] wall_pos = MapGenerator.MapTwo();
+		int[][] wall_pos = MapGenerator.MapTwo();
 
 		//		System.out.println("X: " + x + " Y: " + y);
-		x += vel*Math.cos(Math.toRadians(direction));
-		y += vel*Math.sin(Math.toRadians(direction));
+		double xTemp = x + vel*Math.cos(Math.toRadians(direction));
+		double yTemp = y + vel*Math.sin(Math.toRadians(direction));
 
-		if ((x > 1000)){
-			vel = -vel;
-			direction = 360 - direction;
-			bounceCount++;
+		for (int i=0; i<85;i++ ){
+			for (int j=0; j<64;j++){
+				if (wall_pos[i][j] == 1 && xTemp > i*12 - 8 && xTemp < i*12 + 12  && yTemp > j*12 - 8 && yTemp < j*12 + 12){
+					if (xTemp < i*12 + 12 && xTemp > i*12){
+						vel = -vel;
+						direction = 360 - direction;
+						//					}
+						//					if (yTemp < j*12 + 12 || yTemp > j*12){
+						//					direction = 360 - direction;
+						//					}
+						bounceCount++;
+						return;
+					}
+				}
+			}
 		}
-		if (x < 12 ){
-			vel = -vel;
-			direction = 360 - direction;
-			bounceCount++;
-		}
-		if ((y > 730)){
-			direction = 360 - direction;
-			bounceCount++;
-		}
-		if (y < 12){
-			direction = 360 - direction;
-			bounceCount++;
-		}
+
+		//		if ((xTemp > 1000)){
+		//			vel = -vel;
+		//			direction = 360 - direction;
+		//			bounceCount++;
+		//		}
+		//		if (xTemp < 12 ){
+		//			vel = -vel;
+		//			direction = 360 - direction;
+		//			bounceCount++;
+		//		}
+		//		if ((yTemp > 730)){
+		//			direction = 360 - direction;
+		//			bounceCount++;
+		//		}
+		//		if (yTemp < 12){
+		//			direction = 360 - direction;
+		//			bounceCount++;
+		//		}
 
 
 
@@ -86,6 +105,9 @@ public class Bullet extends JPanel implements ActionListener{
 		//		        }
 		//		    }
 
+		x = xTemp;
+		y = yTemp;
+
 		g.drawImage(bullet, (int)x, (int)y, 8, 8, null);
 
 
@@ -98,9 +120,9 @@ public class Bullet extends JPanel implements ActionListener{
 	public int getY (){
 		return (int)y;
 	}
-		@Override
-		public void actionPerformed(ActionEvent arg0) 
-		{
-			isOutOfBounds = true;
-		}
+	@Override
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		isOutOfBounds = true;
 	}
+}
