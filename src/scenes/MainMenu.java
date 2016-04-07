@@ -1,93 +1,155 @@
 package scenes;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class MainMenu extends JFrame implements ActionListener{
 
-	private JButton campaign;
-	private JButton multiplayer;
-	private JButton training;
-	public MainMenu()
-	{   
-//		public static boolean RIGHT_TO_LEFT = false;
-//		
-//		 public static void addComponentsToPane(Container contentPane) {
-////		    	Use BorderLayout. Default empty constructor with no horizontal and vertical
-////		    	gaps
-//			 contentPane.setLayout(new BorderLayout(5,5));
-//		        if (!(contentPane.getLayout() instanceof BorderLayout)) {
-//		            contentPane.add(new JLabel("Container doesn't use BorderLayout!"));
-//		            return;
-//		        }
-//
-//		        if (RIGHT_TO_LEFT) {
-//		            contentPane.setComponentOrientation(
-//		                java.awt.ComponentOrientation.RIGHT_TO_LEFT);
-//		        }
+	JPanel jp = new JPanel();
+	JLabel a, b, c, d, e = new JLabel();
+	JButton multiplayer = new JButton();
+	JButton campaign = new JButton();
+	JButton training = new JButton();
+	
+	public MainMenu(){ 
 		
 		setScreenLayout();
-
-		//				JFrame frame = new JFrame("SABOTAGE!");
-		//				JPanel panel = new JPanel();
-		//		
-		//				frame.setSize(1024,768);
-		//				frame.setLocation(150,0);
-		//				frame.setResizable(false);
-		//				frame.setVisible(true);
-		//				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		jp.setLayout(new GridLayout(10, 1));
+		
+		a = new JLabel("");
+		a.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\SabotageBackgroundPart1.png"));
+		jp.add(a);
+		b = new JLabel("");
+		b.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\SabotageBackgroundPart2.png"));
+		jp.add(b);
+		c = new JLabel("");
+		c.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\SabotageBackgroundPart3.png"));
+		jp.add(c);
+	
+		
 		campaign = new JButton("Campaign Mode");
+//		campaign.setPreferredSize(new Dimension(40, 40));
+		campaign.setBackground(new Color(10, 106, 2));
+		campaign.setForeground(Color.WHITE);
+		campaign.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankE.png"));
+//		campaign.setPreferredSize(new Dimension(1024, 100));
+		campaign.setFocusPainted(false);
+		campaign.setFont(new Font("Tahoma", Font.BOLD, 30));
 		campaign.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				setVisible(true);
 				removeButtons();
-
 				add(new CampaignGame());
 				setScreenLayout();
+				revalidate();
+				
 			}
 		}); 
+		jp.add(campaign);
 
-		multiplayer = new JButton("Multiplayer Game");
-		multiplayer.setLocation(100,100);
+		multiplayer = new JButton("Multiplayer Mode");
+//		multiplayer.setPreferredSize(new Dimension(40, 40));
 		multiplayer.setBackground(new Color(10, 106, 2));
 		multiplayer.setForeground(Color.WHITE);
+		multiplayer.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankE.png"));
+//		campaign.setPreferredSize(new Dimension(1024, 100));
 		multiplayer.setFocusPainted(false);
-		multiplayer.setFont(new Font("Tahoma", Font.BOLD, 20));
+		multiplayer.setFont(new Font("Tahoma", Font.BOLD, 30));
 		multiplayer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				setVisible(true); 
+				setVisible(true);
 				removeButtons();
-
 				add(new MultiplayerGame());
 				setScreenLayout();
+				revalidate();
+				
 			}
 		}); 
-
-		training = new JButton("Combat Training");
+		jp.add(multiplayer);
+		
+		training = new JButton("Training Mode");
+//		training.setPreferredSize(new Dimension(40, 40));
+		training.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankE.png"));
+		training.setForeground(Color.WHITE);
+		training.setBackground(new Color(10, 106, 2));
+		training.setFocusPainted(false);
+		training.setFont(new Font("Tahoma", Font.BOLD, 30));
 		training.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				setVisible(true); 
+				setVisible(true);
 				removeButtons();
-
 				add(new Training());
 				setScreenLayout();
+				
 			}
 		}); 
+		jp.add(training);
+		
+		d = new JLabel("");
+		d.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\SabotageFooterPart1.png"));
+		jp.add(d);
+		
+		e = new JLabel("");
+		e.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\SabotageFooterPart2.png"));
+		jp.add(e);
+		
+		add(jp);
+		validate();
+//		setScreenLayout();
+//		campaign = new JButton("Campaign Mode");
+//		campaign.addActionListener(new ActionListener(){
+//			public void actionPerformed(ActionEvent e){
+//				setVisible(true);
+//				removeButtons();
+//
+//				add(new CampaignGame());
+//				setScreenLayout();
+//			}
+//		}); 
 
-		add(multiplayer);
-		add(campaign);
-		add(training);
+//		multiplayer = new JButton("Multiplayer Game");
+//		multiplayer.setLocation(100,100);
+//		multiplayer.setBackground(new Color(10, 106, 2));
+//		multiplayer.setForeground(Color.WHITE);
+//		multiplayer.setFocusPainted(false);
+//		multiplayer.setFont(new Font("Tahoma", Font.BOLD, 20));
+//		multiplayer.addActionListener(new ActionListener(){
+//			public void actionPerformed(ActionEvent e){
+//				setVisible(true); 
+//				removeButtons();
+//
+//				add(new MultiplayerGame());
+//				setScreenLayout();
+//			}
+//		}); 
+
+//		training = new JButton("Combat Training");
+//		training.addActionListener(new ActionListener(){
+//			public void actionPerformed(ActionEvent e){
+//				setVisible(true); 
+//				removeButtons();
+//
+//				add(new Training());
+//				setScreenLayout();
+//			}
+//		}); 
+
+//		add(multiplayer);
+//		add(campaign);
+//		add(training);
 		//		pack();
 
 		//		frame.add(campaign);
@@ -102,25 +164,17 @@ public class MainMenu extends JFrame implements ActionListener{
 		//		
 		//					add(singlePlayer);
 		//				add(multiPlayer);
-	}
+}
 
-	public void paint (Graphics g){
-		super.paintComponents(g);
-		g.setColor(new Color( 0, 0, 0));
-		g.fillRect(0, 0, 1024, 768);
-	}
-
+//	public void paint (Graphics g){
+//		super.paintComponents(g);
+//		g.setColor(new Color( 0, 0, 0));
+//		g.fillRect(0, 0, 1024, 768);
+//	}
+	
 	public static void main(String[] args) { 
 		new MainMenu();
-		//		SwingUtilities.invokeLater(new Runnable(){
-		//
-		//            @Override
-		//            public void run()
-		//            {
-		//                new MainMenu().setVisible(true);
-		//            }
-		//
-		//        });
+
 	} 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -146,8 +200,6 @@ public class MainMenu extends JFrame implements ActionListener{
 	}
 
 	public void removeButtons(){
-		remove(campaign);
-		remove(multiplayer);
-		remove(training);
+		jp.removeAll();
 	}
 }
