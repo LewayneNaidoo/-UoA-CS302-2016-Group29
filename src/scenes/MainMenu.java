@@ -41,7 +41,6 @@ public class MainMenu extends JFrame implements ActionListener{
 	
 		
 		campaign = new JButton("Campaign Mode");
-//		campaign.setPreferredSize(new Dimension(40, 40));
 		campaign.setBackground(new Color(10, 106, 2));
 		campaign.setForeground(Color.WHITE);
 		campaign.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankE.png"));
@@ -61,7 +60,6 @@ public class MainMenu extends JFrame implements ActionListener{
 		jp.add(campaign);
 
 		multiplayer = new JButton("Multiplayer Mode");
-//		multiplayer.setPreferredSize(new Dimension(40, 40));
 		multiplayer.setBackground(new Color(10, 106, 2));
 		multiplayer.setForeground(Color.WHITE);
 		multiplayer.setIcon(new ImageIcon("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\playerTankE.png"));
@@ -70,7 +68,6 @@ public class MainMenu extends JFrame implements ActionListener{
 		multiplayer.setFont(new Font("Tahoma", Font.BOLD, 30));
 		multiplayer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				setVisible(true);
 				removeButtons();
 				add(new MultiplayerGame());
 				setScreenLayout();

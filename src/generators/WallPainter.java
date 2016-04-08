@@ -21,7 +21,7 @@ public WallPainter(){
 }
 
 public void paint(Graphics g) {
-    int[][] wall_pos = MapGenerator.MapTwo();
+    int[][] wall_pos = MapGenerator.MapOne();
 // MapGenerator();
 
     for (int x = 0; x <= 84; x++) 

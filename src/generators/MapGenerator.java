@@ -11,9 +11,9 @@ public static int[][] MapOne() {
 
     for (int x = 0; x <= 84; x++) 
     {
-        for (int y = 0; y <= 61; y++) 
+        for (int y = 5; y <= 61; y++) 
         {
-            if (x == 0 || y == 0 || x == 84 || y == 61) {
+            if (x == 0 || y == 5 || x == 84 || y == 61) {
                 numbers[x][y] = 1;
             }
             else {

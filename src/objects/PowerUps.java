@@ -46,27 +46,28 @@ public class PowerUps extends JPanel{
 	public void paint(Graphics g) {
 
 		g.drawImage(powerup, (int)x, (int)y, 24, 24, null);
+		
 	}
 	
 	
 	public static int randomPowerUp(){
 		double random = Math. random() * 6 + 1;
-		if (random == 1){
-			return shield = 1;
-		}
-		else if (random == 2){
-			return tankSpeed = 1;
-		}
-		else if (random == 3){
-			return tankSlow = 1;
-		}
-		else if (random == 4){
-			return bulletSpeed = 1;
-		}
-		else if (random == 5){
-			return bulletSlow = 1;
-		}
-		else return 0;
+//		if (random == 1){
+//			return shield = 1;
+//		}
+//		else if (random == 2){
+//			return tankSpeed = 1;
+//		}
+//		else if (random == 3){
+//			return tankSlow = 1;
+//		}
+//		else if (random == 4){
+//			return bulletSpeed = 1;
+//		}
+//		else if (random == 5){
+//			return bulletSlow = 1;
+//		}
+		return (int) random;
 	}
 	public int getX (){
 		return (int)x;

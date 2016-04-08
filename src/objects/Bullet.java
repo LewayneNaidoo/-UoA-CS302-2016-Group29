@@ -60,10 +60,6 @@ public class Bullet extends JPanel implements ActionListener{
 					if (xTemp < i*12 + 12 && xTemp > i*12){
 						vel = -vel;
 						direction = 360 - direction;
-						//					}
-						//					if (yTemp < j*12 + 12 || yTemp > j*12){
-						//					direction = 360 - direction;
-						//					}
 						bounceCount++;
 						return;
 					}
