@@ -81,7 +81,7 @@ public class PlayerTwo{
 	//	}
 
 	public void move(){
-		int[][] wall_pos = MapGenerator.MapTwo();
+		int[][] wall_pos = MapGenerator.MapOne();
 		//		System.out.println("Xtank: " + x + "Ytank: " + y);
 
 		double xTemp = x + vel*Math.cos(Math.toRadians(direction));

@@ -48,7 +48,7 @@ public class Bullet extends JPanel implements ActionListener{
 
 	public void paint (Graphics g) {
 
-		int[][] wall_pos = MapGenerator.MapTwo();
+		int[][] wall_pos = MapGenerator.MapOne();
 
 		//		System.out.println("X: " + x + " Y: " + y);
 		double xTemp = x + vel*Math.cos(Math.toRadians(direction));

@@ -39,7 +39,7 @@ public class Enemy{
 
 		try 
 		{
-			originalTankImage = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\enemyTank.png"));
+			originalTankImage = ImageIO.read(new File ("C:\\Users\\King\\workspace\\Compsys302_Project\\res\\enemyTank1.png"));
 
 		}
 		catch (IOException e)
@@ -81,7 +81,7 @@ public class Enemy{
 	//	}
 
 	public void move(){
-		int[][] wall_pos = MapGenerator.MapTwo();
+		int[][] wall_pos = MapGenerator.MapOne();
 		//		System.out.println("Xtank: " + x + "Ytank: " + y);
 
 		double xTemp = x + vel*Math.cos(Math.toRadians(direction));

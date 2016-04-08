@@ -52,8 +52,8 @@ public class MultiplayerGame extends JPanel implements ActionListener{
 		setFocusable(true);
 		setDoubleBuffered(true);
 
-		playerOne = new Player(20, 320, 270, true);
-		playerTwo = new PlayerTwo(900, 320, 90, false);
+		playerOne = new Player(900, 320, 180, true);
+		playerTwo = new PlayerTwo(20, 320, 0, false);
 		wall = new WallPainter();
 		double k = Math.random()*1000+20;
 		double l = Math.random()*750+20;
